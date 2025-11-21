@@ -5,7 +5,7 @@ This project demonstrate a pipeline for processing **user activity logs** using 
 ## Pipeline
 ```mermaid
 flowchart TD
-    A[Producer] --> B[Kafka "Topics user-activity"]
+    A[Producer] --> B[Kafka (Topics user-activity)]
     c[Consumer] --> B
     B --> D[MongoDB]
 ```
