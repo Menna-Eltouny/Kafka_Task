@@ -19,7 +19,7 @@ class KafkaService {
             await this.consumer.connect();
             console.log('\nCONNECTED TO KAFKA SUCCESSFULLY');
 
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            //await new Promise(resolve => setTimeout(resolve, 2000));
             this.isConnected = true;
 
         } catch (error) {

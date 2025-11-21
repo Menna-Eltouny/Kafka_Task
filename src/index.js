@@ -44,15 +44,18 @@ async function startServer() {
         await kafkaService.connect();
         console.log('Kafka Producer connected');
 
-        setTimeout(async () => {
-            try {
-                await processKafkaMessages();
-                console.log('\nStarted consuming Kafka messages');
+        await processKafkaMessages();
+        console.log('Started consuming Kafka messages');
 
-            } catch (error) {
-                console.error('\nError consuming Kafka message processing:');
-            }
-        }, 5000);
+//        setTimeout(async () => {
+//            try {
+//                await processKafkaMessages();
+//                console.log('\nStarted consuming Kafka messages');
+//
+//            } catch (error) {
+//                console.error('\nError consuming Kafka message processing:');
+//            }
+//        }, 5000);
 
         app.listen(PORT, () => {
             console.log(`\nServer is running on port ${PORT}`);

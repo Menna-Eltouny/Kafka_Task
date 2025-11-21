@@ -1,7 +1,10 @@
 // Handles activity-related HTTP requests
 
-const activityService = require('../services/activityService');
-const kafkaService = require('../services/kafkaService');
+const ActivityService = require('../services/activityService');
+const KafkaService = require('../services/kafkaService');
+
+const activityService = new ActivityService();
+const kafkaService = new KafkaService();
 
 class ActivityController {
     // Handles POST HTTP
@@ -22,7 +25,9 @@ class ActivityController {
                 timestamp: new Date()
             };
 
+            
             console.log('\nRecieved activity',userId)
+            
             await activityService.saveActivity(activityData);
             console.log('\nSaved activity to Mongo',userId);
             
@@ -57,7 +62,7 @@ class ActivityController {
             const limit = parseInt(req.query.limit) || 10;
             const userId = req.query.userId || null;
             
-            const result = await activityService.getActivitiesByUser(page, limit, userId);
+            const result = await activityService.getActivities(page, limit, userId);
 
             res.json({
                 success: true,
