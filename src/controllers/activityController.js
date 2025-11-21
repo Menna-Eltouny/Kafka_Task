@@ -19,8 +19,21 @@ class ActivityController {
                 timestamp: new Date()
             };
 
-            await kafkaService.produceActivity(activityData);
+            console.log('\nRecieved activity',userId)
+            await activityService.saveActivity(activityData);
+            console.log('\nSaved activity to Mongo',userId);
+            
+            try {
+                if (!kafkaService.isConnected) {
+                    await kafkaService.produceActivity(activityData);
+                    console.log('\nProduced activity to Kafka',userId);
+                }
+            } catch (kafkaError) {
+                console.error('\nKafka produce error but saved:', kafkaError.message);
+            }
 
+            
+            
             res.status(202).json({
                 success: true,
                 message: 'Activity is being processed',

@@ -37,9 +37,18 @@ async function startServer() {
         console.log('Connected to MongoDB');
 
         await kafkaService.connect();
-        setTimeout(() => {
-        processKafkaMessages();
-        }, 15000);
+        console.log('Kafka Producer connected');
+
+        setTimeout(async () => {
+            try {
+                await processKafkaMessages();
+                console.log('\nStarted consuming Kafka messages');
+
+            } catch (error) {
+                console.error('\nError consuming Kafka message processing:');
+            }
+        }, 5000);
+
         app.listen(PORT, () => {
             console.log(`\nServer is running on port ${PORT}`);
         });
