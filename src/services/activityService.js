@@ -1,3 +1,5 @@
+//Handles activity logging and retrieval
+
 const Activity = require('../models/Activity');
 
 class ActivityService {

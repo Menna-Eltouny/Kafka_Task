@@ -1,3 +1,6 @@
+// src/index.js
+// Entry point for the Express server, MongoDB connection, and Kafka integration
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -17,6 +20,7 @@ app.use('/api', routes);
 const kafkaService = new KafkaService();
 const activityService = new ActivityService();
 
+// Process messages from Kafka and save to MongoDB
 async function processKafkaMessages() {
     try{
         await kafkaService.consumeActivities(async (activity) => {
@@ -31,6 +35,7 @@ async function processKafkaMessages() {
     }
 }
 
+// Start the server after connecting to MongoDB and Kafka
 async function startServer() {
     try {
         await mongoose.connect(process.env.MONGODB_URI);

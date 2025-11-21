@@ -1,7 +1,10 @@
+// Handles activity-related HTTP requests
+
 const activityService = require('../services/activityService');
 const kafkaService = require('../services/kafkaService');
 
 class ActivityController {
+    // Handles POST HTTP
     async createActivity(req, res) {
         try {
             const { userId, action, resource } = req.body;
@@ -47,7 +50,7 @@ class ActivityController {
             });
         }
     }
-
+    // Handles GET HTTP
     async getActivities(req, res) {
         try {
             const page = parseInt(req.query.page) || 1;

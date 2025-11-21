@@ -1,3 +1,5 @@
+// Manages Kafka producer and consumer for user activities
+
 const { Kafka } = require('kafkajs');
 
 class KafkaService {
