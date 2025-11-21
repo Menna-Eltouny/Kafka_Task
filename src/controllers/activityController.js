@@ -1,0 +1,59 @@
+const activityService = require('../services/activityService');
+const kafkaService = require('../services/kafkaService');
+
+class ActivityController {
+    async createActivity(req, res) {
+        try {
+            const { userId, action, resource } = req.body;
+
+            if(!userId || !action || !resource) {
+                return res.status(404).json({
+                    error: 'Missing required fields: userId, action, resource'
+                });
+            }
+
+            const activityData = {
+                userId,
+                action,
+                resource,
+                timestamp: new Date()
+            };
+
+            await kafkaService.produceActivity(activityData);
+
+            res.status(202).json({
+                success: true,
+                message: 'Activity is being processed',
+                data: activityData
+                
+            });
+        } catch (error) {
+            res.status(500).json({
+                error: 'Failed to create activity',
+                details: error.message
+            });
+        }
+    }
+
+    async getActivities(req, res) {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 10;
+            const userId = req.query.userId || null;
+            
+            const result = await activityService.getActivitiesByUser(page, limit, userId);
+
+            res.json({
+                success: true,
+                data: result
+            });
+        } catch (error) {
+            res.status(500).json({
+                error: '\nFailed to retrieve activities',
+                messages: error.message
+            });
+        }
+    }
+}
+
+module.exports = ActivityController;
