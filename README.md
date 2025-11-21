@@ -23,6 +23,7 @@ This project demonstrate a pipeline for processing **user activity logs** using 
 - Node.js app (Producer + Consumer)
 
 ## Project Structure
+``` bash
 ├── docker-compose.yml
 ├── Dockerfile
 ├── .env
@@ -40,6 +41,7 @@ This project demonstrate a pipeline for processing **user activity logs** using 
     └── services
         ├── activityService.js
         └── kafkaService.js
+```
 
 ## Running the System
 ### 1. clone the repository
