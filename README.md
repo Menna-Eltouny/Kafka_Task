@@ -23,23 +23,23 @@ This project demonstrate a pipeline for processing **user activity logs** using 
 - Node.js app (Producer + Consumer)
 
 ## Project Structure
-user-activity-service/
-├── 📁 src/
-│   ├── 📄 index.js                 # Main application entry point
-│   ├── 📁 models/
-│   │   └── 📄 Activity.js          # MongoDB schema and model
-│   ├── 📁 services/
-│   │   ├── 📄 kafkaService.js      # Kafka producer/consumer service
-│   │   └── 📄 activityService.js   # Business logic for activities
-│   ├── 📁 controllers/
-│   │   └── 📄 activityController.js # HTTP request handlers
-│   └── 📄 routes.js                # Express route definitions
-├── 📄 docker-compose.yml           # Docker orchestration
-├── 📄 Dockerfile                   # Container configuration
-├── 📄 .env                         # Environment variables
-├── 📄 .env.example                 # Environment template
-├── 📄 package.json                 # Dependencies and scripts
-└── 📄 README.md                    # Documentation
+├── docker-compose.yml
+├── Dockerfile
+├── .env
+├── package.json
+├── package-lock.json
+├── README.md
+├── restart-docker-compose.sh
+└── src
+    ├── controllers
+    │   └── activityController.js
+    ├── index.js
+    ├── models
+    │   └── Activity.js
+    ├── routes.js
+    └── services
+        ├── activityService.js
+        └── kafkaService.js
 
 ## Running the System
 ### 1. clone the repository
