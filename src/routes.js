@@ -1,3 +1,5 @@
+// Handles routing for activity-related endpoints
+
 const express = require('express');
 const ActivityController = require('../src/controllers/activityController');
 
